@@ -1,10 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Auth/login";
+import TopBar from "./pages/global/TopBar";
 
 function App() {
   return (
     <Router>
+      <TopBar />
+
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route
           path="*"
           element={

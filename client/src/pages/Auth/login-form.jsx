@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../../components/common/Button";
 import { Eye, EyeOff, Lock, User } from "lucide-react";
+import axios from "axios";
 
 const LoginForm = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -43,15 +44,34 @@ const LoginForm = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form submitted with data:", formData);
 
     if (!validateForm()) return;
 
     setIsLoading(true);
+    setErrors({});
 
-    setTimeout(() => {
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/users/login",
+        formData
+      );
+
+      if (response.status === 200) {
+        setIsLoading(false);
+        onLogin(response.data);
+      } else {
+        setIsLoading(false);
+        setErrors({ api: "Login failed. Please try again." });
+      }
+    } catch (error) {
       setIsLoading(false);
-      onLogin(formData);
-    }, 1500);
+      setErrors({
+        api:
+          error.response?.data?.error ||
+          "Login failed. Please check your credentials.",
+      });
+    }
   };
 
   return (

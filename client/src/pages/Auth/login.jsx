@@ -1,7 +1,13 @@
 import LoginForm from "./login-form";
 import { Building2 } from "lucide-react";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const handleLogin = (data) => {
+    console.log("Login successful:", data);
+    localStorage.setItem("user", JSON.stringify(data));
+    window.location.href = "/dashboard";
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-100 flex items-center justify-center p-4">
       <div className="absolute inset-0 opacity-5">
@@ -15,7 +21,7 @@ const Login = ({ onLogin }) => {
       </div>
 
       <div className="relative z-10 w-full max-w-md">
-        <LoginForm onLogin={onLogin} />
+        <LoginForm onLogin={handleLogin} />
 
         <div className="text-center mt-8">
           <p className="text-sm text-amber-600">

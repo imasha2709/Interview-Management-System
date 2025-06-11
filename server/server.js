@@ -8,7 +8,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: ["http://192.168.12.90:5173", "http://localhost:5173"],
+    origin: [
+      "http://192.168.12.90:5173",
+      "http://localhost:5173",
+      "https://interview-management-sys-e4efa.web.app",
+    ],
     credentials: true,
   })
 );

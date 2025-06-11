@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const TopBar = ({ onLogout, onToggleSidebar }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const userjson = JSON.parse(localStorage.getItem("user"));
+  const userjson = JSON.parse(localStorage.getItem("user")) || {};
   const user = userjson.user || null;
 
   const onMenuClick = () => {

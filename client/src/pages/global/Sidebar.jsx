@@ -132,7 +132,6 @@ const Sidebar = ({ isOpen, onClose }) => {
             if (hasSubmenu) {
               toggleSubmenu(item.key);
             } else {
-              console.log(`Navigate to: ${item.path}`);
               onClose();
             }
           }}

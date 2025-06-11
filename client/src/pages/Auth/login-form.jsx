@@ -44,7 +44,6 @@ const LoginForm = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted with data:", formData);
 
     if (!validateForm()) return;
 

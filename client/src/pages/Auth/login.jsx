@@ -3,7 +3,6 @@ import { Building2 } from "lucide-react";
 
 const Login = () => {
   const handleLogin = (data) => {
-    console.log("Login successful:", data);
     localStorage.setItem("user", JSON.stringify(data));
     window.location.href = "/dashboard";
   };

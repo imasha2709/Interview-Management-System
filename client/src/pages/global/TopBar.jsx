@@ -1,15 +1,25 @@
 import { Menu, Settings, User } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ProfileSettings from "../profileView";
+import ProfileManager from "../ProfileManager";
 
 const TopBar = ({ onLogout, onToggleSidebar }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const userjson = JSON.parse(localStorage.getItem("user")) || {};
   const user = userjson.user || null;
 
+  const navigate = useNavigate();
+  const [showProfile, setShowProfile] = useState(false);
+
   const onMenuClick = () => {
     if (onToggleSidebar) {
       onToggleSidebar();
     }
+  };
+
+  const openProfile = () => {
+    setShowProfile(true);
   };
 
   return (
@@ -56,8 +66,6 @@ const TopBar = ({ onLogout, onToggleSidebar }) => {
                   {user && (
                     <div className="px-4 py-3 border-b border-amber-100">
                       <p className="text-sm font-medium text-amber-900">
-                        {console.log(user)}
-
                         {user.username}
                       </p>
                       <p className="text-xs text-amber-600">{user.email}</p>
@@ -65,7 +73,10 @@ const TopBar = ({ onLogout, onToggleSidebar }) => {
                   )}
 
                   <div className="py-1 px-2">
-                    <button className="w-full text-left px-4 py-2 text-sm text-amber-700 hover:bg-amber-50 transition-colors">
+                    <button
+                      className="w-full text-left px-4 py-2 text-sm text-amber-700 hover:bg-amber-50 transition-colors"
+                      onClick={openProfile}
+                    >
                       Profile Settings
                     </button>
                     <button className="w-full text-left px-4 py-2 text-sm text-amber-700 hover:bg-amber-50 transition-colors">
@@ -92,6 +103,9 @@ const TopBar = ({ onLogout, onToggleSidebar }) => {
               </>
             )}
           </div>
+          {showProfile && (
+            <ProfileManager user={user} onClose={() => setShowProfile(false)} />
+          )}
         </div>
       )}
     </header>

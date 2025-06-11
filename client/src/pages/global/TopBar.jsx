@@ -1,11 +1,16 @@
 import { Menu, Settings, User } from "lucide-react";
 import { useState } from "react";
 
-const TopBar = ({ onMenuClick, onLogout }) => {
+const TopBar = ({ onLogout, onToggleSidebar }) => {
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userjson = JSON.parse(localStorage.getItem("user"));
+  const user = userjson.user || null;
 
-  console.log("TopBar user:", user);
+  const onMenuClick = () => {
+    if (onToggleSidebar) {
+      onToggleSidebar();
+    }
+  };
 
   return (
     <header
@@ -51,10 +56,11 @@ const TopBar = ({ onMenuClick, onLogout }) => {
                   {user && (
                     <div className="px-4 py-3 border-b border-amber-100">
                       <p className="text-sm font-medium text-amber-900">
-                        {user.name}
+                        {console.log(user)}
+
+                        {user.username}
                       </p>
                       <p className="text-xs text-amber-600">{user.email}</p>
-                      <p className="text-xs text-amber-500 mt-1">{user.role}</p>
                     </div>
                   )}
 

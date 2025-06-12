@@ -15,6 +15,7 @@ import Card from "../components/common/Card";
 import InputField from "../components/common/InputField";
 import axios from "axios";
 
+
 const ProfileInformation = ({ user, onClose, onNavigateToView }) => {
   const [formData, setFormData] = useState({
     email: user?.email || "",
